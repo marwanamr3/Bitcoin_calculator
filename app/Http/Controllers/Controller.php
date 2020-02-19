@@ -20,9 +20,9 @@ class Controller extends BaseController
             $response = $client->request('GET', 'https://api.coindesk.com/v1/bpi/historical/close.json?start='.$request['from'].'&end='.$request['to']);
             $body = $response->getBody()->getContents();
         }catch (RequestException $e){
-            var_dump($e->getMessage());
+            $data['msg'] = $e->getMessage();
+            return view('welcome', ['body' => $data]);
         }
-
         return view('welcome', ['body' => $body]);
     }
 }
