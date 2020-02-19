@@ -2,20 +2,43 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ExampleTest extends TestCase
+//use Tests\TestCase;
+
+abstract class ExampleTest extends TestCase
 {
+
+    public function testBasicTest()
+    {
+        $response = $this->get('/');
+        $response->assertStatus(200);
+    }
+
     /**
      * A basic test example.
      *
      * @return void
      */
-    public function testBasicTest()
+    public function getViewTest()
     {
         $response = $this->get('/');
 
-        $response->assertStatus(200);
+        $response->assertResponseOk();
+    }
+
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function post_dates_test()
+    {
+        $response = $this->post('/info', [
+            'from' => '2019-02-03',
+            'to' => '2019-03-04'
+        ]);
+
+        $response->assertResponseOk();
     }
 }
